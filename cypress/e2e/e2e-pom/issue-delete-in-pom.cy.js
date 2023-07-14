@@ -18,18 +18,18 @@ describe('Issue delete', () => {
   it('Should delete issue successfully', () => {
     //Find delete button on issue detailed view and click it
     IssueModal.findDeleteButton();
-    //In confirmation view find the blue "Delete" button on click it.
+    //In confirmation view find the blue "Delete" button and click it.
+    //Pop-up closes and returns to previous page
     IssueModal.confirmDeletion();
-    //Assert that issue is not visible in the board.
+    //Assert that issue is not visible on the board.
     IssueModal.ensureIssueIsNotVisibleOnBoard(issueTitle);
   });
 
   it('Should cancel deletion process successfully', () => {
-    //Assert that issue detail view modal is visible
-    //IssueModal.issueDetailModal.should('exist');
-    //Find delete button and click it
+    //Find delete button on issue detailed view and click it
     IssueModal.findDeleteButton();
-    //Assert that deletion confirmation window is visible
+    //In confirmation view find the blue "Cancel" button and click it.
+    //Pop-up closes and returns to previous page
     IssueModal.cancelDeletion();
     //Close issue report window
     IssueModal.closeDetailModal();
