@@ -16,10 +16,24 @@ describe('Issue delete', () => {
   const issueTitle = 'This is an issue of type: Task.';
 
   it('Should delete issue successfully', () => {
-    //add steps to delete issue
+    //Find delete button on issue detailed view and click it
+    IssueModal.findDeleteButton();
+    //In confirmation view find the blue "Delete" button on click it.
+    IssueModal.confirmDeletion();
+    //Assert that issue is not visible in the board.
+    IssueModal.ensureIssueIsNotVisibleOnBoard(issueTitle);
   });
 
   it('Should cancel deletion process successfully', () => {
-    //add steps to start deletion proces but cancel it
+    //Assert that issue detail view modal is visible
+    //IssueModal.issueDetailModal.should('exist');
+    //Find delete button and click it
+    IssueModal.findDeleteButton();
+    //Assert that deletion confirmation window is visible
+    IssueModal.cancelDeletion();
+    //Close issue report window
+    IssueModal.closeDetailModal();
+    //Assert that issue is visible on the board
+    IssueModal.ensureIssueIsVisibleOnBoard(issueTitle);
   });
 });

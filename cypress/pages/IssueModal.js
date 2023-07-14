@@ -15,7 +15,7 @@ class IssueModal {
         this.confirmationPopup = '[data-testid="modal:confirm"]';
         this.closeDetailModalButton = '[data-testid="icon:close"]';
     }
-
+    
     getIssueModal() {
         return cy.get(this.issueModal);
     }
@@ -79,6 +79,12 @@ class IssueModal {
         cy.get(this.issueDetailModal).should('not.exist');
         cy.reload();
         cy.contains(issueTitle).should('not.exist');
+    }
+
+    findDeleteButton(){
+        cy.get(this.issueDetailModal).within(() => {
+            cy.get(this.deleteButton).click();
+    });
     }
 
     clickDeleteButton(){
