@@ -183,4 +183,34 @@ describe('Issue create', () => {
     });
   });
 
+  it("TASK #3: Verify if unnecessary spaces are removed.", () => { 
+
+    const title = '  Henlo Wolrd  ';
+    const description = 'Smol diskriptsion';
+
+    // Fill in info for new issue
+    cy.get('[data-testid="modal:issue-create"]').within(() => {
+      cy.get('.ql-editor').type(description);
+      cy.get('input[name="title"]').type(title);
+      cy.get('[data-testid="select:userIds"]').click();
+      cy.get('[data-testid="select-option:Lord Gaben"]').click();
+      cy.get('button[type="submit"]').click();
+    });
+    // Asserting that issue creation window is closed and reloading the page
+    cy.get('[data-testid="modal:issue-create"]').should('not.exist');
+    cy.reload();
+    cy.get('[data-testid="board-list:backlog').should('be.visible').and('have.length', '1').within(() => {
+      cy.get('[data-testid="list-issue"]').should('have.length', '5').first().find('p').click();
+    });
+    // Removing spaces and updating the issue title
+    cy.get('[placeholder="Short summary"]').invoke('text').then((text) => {
+      const textTrim = text.trim();
+      const unnecessarySpaces = textTrim.includes('   ');
+      expect(unnecessarySpaces).to.be.false;
+      cy.get('[placeholder="Short summary"]').clear().type(textTrim);
+      cy.log(`New issue title: ${textTrim}`);
+      cy.log('Closing window');
+      cy.get('[data-testid="icon:close"]').first().click();
+    });
+  });
 });
