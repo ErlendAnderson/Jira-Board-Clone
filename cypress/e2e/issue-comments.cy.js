@@ -27,7 +27,7 @@ describe('Issue comments creating, editing and deleting', () => {
         });
     }); */
 
-    it('Should create,edit and delete comment successfully', () => {
+    it('Should create, edit and delete comment successfully', () => {
         const comment = 'I am typing more text here because this way I have time to observe what the program is typing.';
         const comment_edited = 'AGAIN, I AM WRITING QUITE A BIT HERE ONLY TO SEE IF THE PROGRAM IS DOING THE CORRECT THINGS OR ITS FOLLOWING MY MESSED UP CODE AGAIN';
 
